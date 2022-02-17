@@ -5,10 +5,21 @@ protocol ViewProtocol: AnyObject {
     func failure(error: String)
 }
 
-class ViewController: ViewProtocol {
+class FirstViewController: ViewProtocol {
     
     func success() {
         print("SUCCESS")
+    }
+    
+    func failure(error: String) {
+        print(error)
+    }
+}
+
+class SecondViewController: ViewProtocol {
+    
+    func success() {
+        print("TRUE")
     }
     
     func failure(error: String) {
@@ -34,8 +45,10 @@ class Presenter {
     }
 }
 
-var view = ViewController()
-var presenter = Presenter(view: view)
+var firstView = FirstViewController()
+var secondView = SecondViewController()
+var presenter = Presenter(view: firstView)
 
 presenter.doSmth()
-
+presenter.view = secondView
+presenter.doSmth()
