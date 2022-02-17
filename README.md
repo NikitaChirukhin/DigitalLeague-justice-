@@ -1,3 +1,3 @@
 ## DigitalLeague
 
-simple tusk for digitalLeague
+simple tusk for digitalleague
