@@ -1,24 +1,14 @@
-protocol Alliance {
+protocol Hero {
     
-    typealias Statistics = (armor: Float, attackPower: Float, strength: Float, agility: Float, intelligence: Float, hitPoints: Float, mana: Float)
-    
-    var armor: Float? { get }
-    var attackPower: Float? { get }
-    var strength: Float? { get }
-    var agility: Float? { get }
-    var intelligence: Float? { get }
-    var hitPoints: Float? { get }
-    var mana: Float? { get }
-    
-    init(statistics: Statistics)
+    var characteristics: Characteristics { get set }
     
     func attack()
     func move()
     func stop()
-    func updateStatistic(_ statistic: Statistics)
+    mutating func updateCharacteristics(_ characteristics: Characteristics)
 }
 
-extension Alliance {
+extension Hero {
     
     func attack() {
         print("attack")
@@ -31,12 +21,14 @@ extension Alliance {
     func stop() {
         print("stop")
     }
+    
+    mutating func updateCharacteristics(_ characteristics: Characteristics) {
+        self.characteristics = characteristics
+    }
 }
 
-class Archmage: Alliance {
+struct Characteristics {
     
-    typealias Statistics = (armor: Float, attackPower: Float, strength: Float, agility: Float, intelligence: Float, hitPoints: Float, mana: Float)
-
     private(set) var armor: Float?
     private(set) var attackPower: Float?
     private(set) var strength: Float?
@@ -44,65 +36,41 @@ class Archmage: Alliance {
     private(set) var intelligence: Float?
     private(set) var hitPoints: Float?
     private(set) var mana: Float?
-
-    required init(statistics: Statistics) {
-        self.armor = statistics.armor
-        self.attackPower = statistics.attackPower
-        self.strength = statistics.strength
-        self.agility = statistics.agility
-        self.intelligence = statistics.intelligence
-        self.hitPoints = statistics.hitPoints
-        self.mana = statistics.mana
+    
+    init(characteristics: Characteristics) {
+        self.armor = characteristics.armor
+        self.attackPower = characteristics.attackPower
+        self.strength = characteristics.strength
+        self.agility = characteristics.agility
+        self.intelligence = characteristics.intelligence
+        self.hitPoints = characteristics.hitPoints
+        self.mana = characteristics.mana
     }
+}
 
+class Archmage: Hero {
+
+    var characteristics: Characteristics
+    
     func attack() {
         print("long-range attack")
     }
-
-    func updateStatistic(_ statistics: Statistics) {
-        self.armor = statistics.armor
-        self.attackPower = statistics.attackPower
-        self.strength = statistics.strength
-        self.agility = statistics.agility
-        self.intelligence = statistics.intelligence
-        self.hitPoints = statistics.hitPoints
-        self.mana = statistics.mana
+    
+    init(characteristics: Characteristics) {
+        self.characteristics = characteristics
     }
 }
 
-class Knight: Alliance {
+class Knight: Hero {
+
     
-    typealias Statistics = (armor: Float, attackPower: Float, strength: Float, agility: Float, intelligence: Float, hitPoints: Float, mana: Float)
-
-    private(set) var armor: Float?
-    private(set) var attackPower: Float?
-    private(set) var strength: Float?
-    private(set) var agility: Float?
-    private(set) var intelligence: Float?
-    private(set) var hitPoints: Float?
-    private(set) var mana: Float?
-
-    required init(statistics: Statistics) {
-        self.armor = statistics.armor
-        self.attackPower = statistics.attackPower
-        self.strength = statistics.strength
-        self.agility = statistics.agility
-        self.intelligence = statistics.intelligence
-        self.hitPoints = statistics.hitPoints
-        self.mana = statistics.mana
-    }
-
+    var characteristics: Characteristics
+    
     func attack() {
         print("melee attack")
     }
-
-    func updateStatistic(_ statistics: Statistics) {
-        self.armor = statistics.armor
-        self.attackPower = statistics.attackPower
-        self.strength = statistics.strength
-        self.agility = statistics.agility
-        self.intelligence = statistics.intelligence
-        self.hitPoints = statistics.hitPoints
-        self.mana = statistics.mana
+    
+    init(characteristics: Characteristics) {
+        self.characteristics = characteristics
     }
 }
