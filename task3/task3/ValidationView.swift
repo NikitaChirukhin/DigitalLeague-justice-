@@ -7,11 +7,15 @@
 
 import UIKit
 
+protocol ValidationViewDelegate: AnyObject {
+    func didTapOnValidationButton(validationText: String, validationTarget: String) -> Bool
+}
+
 class ValidationView: UIView {
     
-    weak var delegate: NameValidationViewDelegate?
+    weak var delegate: ValidationViewDelegate?
     
-    lazy var textField: UITextField = {
+    private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemBackground
         textField.borderStyle = .roundedRect
@@ -19,14 +23,14 @@ class ValidationView: UIView {
         return textField
     }()
     
-    lazy var validationResultLabel: UILabel = {
+    private lazy var validationResultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Waiting..."
         return label
     }()
     
-    lazy var validationButton: UIButton = {
+    private lazy var validationButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Validate", for: .normal)
@@ -41,10 +45,13 @@ class ValidationView: UIView {
     init(validationTargetName: String) {
         super.init(frame: .zero)
         
-        textField.placeholder = validationTargetName
-
+        backgroundColor = .secondarySystemBackground
+        layer.cornerRadius = 12
+        
         setUpView()
         setUpConstraint()
+        
+        textField.placeholder = validationTargetName
     }
     
     required init?(coder: NSCoder) {

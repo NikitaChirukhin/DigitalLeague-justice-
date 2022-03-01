@@ -7,16 +7,10 @@
 
 import UIKit
 
-protocol NameValidationViewDelegate: AnyObject {
-    func didTapOnValidationButton(validationText: String, validationTarget: String) -> Bool
-}
-
 class ViewController: UIViewController {
     lazy var nameValidationView: ValidationView = {
         let view = ValidationView(validationTargetName: "FullName")
         view.delegate = self
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = 12
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -24,8 +18,6 @@ class ViewController: UIViewController {
     lazy var emailValidationView: ValidationView = {
         let view = ValidationView(validationTargetName: "Email")
         view.delegate = self
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = 12
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,7 +32,7 @@ class ViewController: UIViewController {
 
 //MARK: - ViewController Private methods
 
-extension ViewController: NameValidationViewDelegate {
+extension ViewController: ValidationViewDelegate {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
