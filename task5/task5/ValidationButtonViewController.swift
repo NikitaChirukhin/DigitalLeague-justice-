@@ -52,6 +52,7 @@ extension ValidationButtonViewController {
     
     @objc private func buttonTap(sender: UIButton) {
         guard let key = sender.title(for: .normal) else { return }
+        print(key)
         if key == "Email" {
             let validationViewController = ValidationViewController(key: key)
             navigationController?.pushViewController(validationViewController, animated: true)

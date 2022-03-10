@@ -19,7 +19,7 @@ class ValidationButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupButton(buttonText: String) {
+    private func setupButton(buttonText: String) {
         
         backgroundColor = .systemMint
         layer.cornerRadius = 15

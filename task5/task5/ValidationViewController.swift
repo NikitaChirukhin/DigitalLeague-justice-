@@ -14,13 +14,15 @@ class ValidationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         view.backgroundColor = .systemBackground
     }
     
     override func loadView() {
         super.loadView()
-        
-        view = ReplacementViewForValidationViewController(key: key)
+        let newView = ReplacementViewForValidationViewController(key: key)
+        newView.setDelegate(delegate: self)
+        view = newView
     }
     
     init(key: String) {
@@ -39,6 +41,7 @@ extension ValidationViewController: ValidationViewDelegate {
     
     func didTapOnValidationButton(validationText: String, validationTarget: String) -> Bool {
         
+        print(validationTarget)
         var isValid = false
         
         if validationTarget == "Name" {

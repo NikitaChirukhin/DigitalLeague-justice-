@@ -11,7 +11,7 @@ class ReplacementViewForValidationViewController: UIView {
     
     private let key: String
     
-    lazy var validationView: ValidationView = {
+    private lazy var validationView: ValidationView = {
         let view = ValidationView(validationTargetName: key)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -24,7 +24,6 @@ class ReplacementViewForValidationViewController: UIView {
         
         setupView()
         setupConstraints()
-
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +34,10 @@ class ReplacementViewForValidationViewController: UIView {
 //MARK: - ViewController Private methods
 
 extension ReplacementViewForValidationViewController {
+    
+    func setDelegate(delegate: ValidationViewDelegate) {
+        validationView.delegate = delegate
+    }
     
     private func setupView() {
         backgroundColor = .systemBackground
