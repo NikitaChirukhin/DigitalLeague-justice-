@@ -9,10 +9,15 @@ import UIKit
 
 class ValidationButtonViewController: UIViewController {
     
-    private let builder: Builder
-    
     private lazy var emailButton: ValidationButton = {
         let button = ValidationButton(buttonText: "Email")
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var nameButton: ValidationButton = {
+        let button = ValidationButton(buttonText: "Name")
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
         return button
@@ -24,35 +29,36 @@ class ValidationButtonViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupView()
     }
-
-    init(builder: Builder){
-        self.builder = builder
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 extension ValidationButtonViewController {
+    
     private func setupView() {
         view.addSubview(emailButton)
+        view.addSubview(nameButton)
         
         NSLayoutConstraint.activate([
-            emailButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 260),
-            emailButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -260),
+            nameButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
+            nameButton.heightAnchor.constraint(equalToConstant: 50),
+            nameButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            nameButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            
+            emailButton.topAnchor.constraint(equalTo: nameButton.bottomAnchor, constant: 50),
+            emailButton.heightAnchor.constraint(equalToConstant: 50),
             emailButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            emailButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            emailButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
         ])
     }
-    
     
     @objc private func buttonTap(sender: UIButton) {
         guard let key = sender.title(for: .normal) else { return }
         if key == "Email" {
-            builder.pushValidationView(key: key)
+            let validationViewController = ValidationViewController(key: key)
+            navigationController?.pushViewController(validationViewController, animated: true)
+        }
+        if key == "Name" {
+            let validationViewController = ValidationViewController(key: key)
+            navigationController?.present(validationViewController, animated: true)
         }
     }
 }

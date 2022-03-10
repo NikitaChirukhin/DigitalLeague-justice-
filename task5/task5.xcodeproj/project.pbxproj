@@ -13,11 +13,9 @@
 		8A1BE70427CE83D900F9F465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A1BE70327CE83D900F9F465 /* Assets.xcassets */; };
 		8A1BE70727CE83D900F9F465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A1BE70527CE83D900F9F465 /* LaunchScreen.storyboard */; };
 		8A1BE70F27CEB1DD00F9F465 /* ValidationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BE70E27CEB1DD00F9F465 /* ValidationButton.swift */; };
-		8A1BE71127CF4FC700F9F465 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BE71027CF4FC700F9F465 /* Router.swift */; };
 		8A1BE71327CF50FF00F9F465 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1BE71227CF50FF00F9F465 /* ValidationViewController.swift */; };
 		8A424FE327CF86A30028D40C /* ValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A424FE227CF86A30028D40C /* ValidationView.swift */; };
-		8A424FE627CF87B30028D40C /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A424FE527CF87B30028D40C /* Builder.swift */; };
-		8A424FE927D52B810028D40C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A424FE827D52B810028D40C /* Errors.swift */; };
+		8AACD12427D9EE2F00D2B3D0 /* ReplacementViewForValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AACD12327D9EE2F00D2B3D0 /* ReplacementViewForValidationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +27,9 @@
 		8A1BE70627CE83D900F9F465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A1BE70827CE83D900F9F465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A1BE70E27CEB1DD00F9F465 /* ValidationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationButton.swift; sourceTree = "<group>"; };
-		8A1BE71027CF4FC700F9F465 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8A1BE71227CF50FF00F9F465 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
 		8A424FE227CF86A30028D40C /* ValidationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationView.swift; sourceTree = "<group>"; };
-		8A424FE527CF87B30028D40C /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
-		8A424FE827D52B810028D40C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		8AACD12327D9EE2F00D2B3D0 /* ReplacementViewForValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplacementViewForValidationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,11 +63,10 @@
 			isa = PBXGroup;
 			children = (
 				8A1BE6FA27CE83D600F9F465 /* AppDelegate.swift */,
-				8A424FE827D52B810028D40C /* Errors.swift */,
 				8A1BE6FC27CE83D600F9F465 /* SceneDelegate.swift */,
-				8A424FE427CF872B0028D40C /* ServiceLayer */,
 				8A1BE6FE27CE83D600F9F465 /* ValidationButtonViewController.swift */,
 				8A1BE71227CF50FF00F9F465 /* ValidationViewController.swift */,
+				8AACD12327D9EE2F00D2B3D0 /* ReplacementViewForValidationViewController.swift */,
 				8A424FE227CF86A30028D40C /* ValidationView.swift */,
 				8A1BE70E27CEB1DD00F9F465 /* ValidationButton.swift */,
 				8A1BE70327CE83D900F9F465 /* Assets.xcassets */,
@@ -79,15 +74,6 @@
 				8A1BE70827CE83D900F9F465 /* Info.plist */,
 			);
 			path = task5;
-			sourceTree = "<group>";
-		};
-		8A424FE427CF872B0028D40C /* ServiceLayer */ = {
-			isa = PBXGroup;
-			children = (
-				8A1BE71027CF4FC700F9F465 /* Router.swift */,
-				8A424FE527CF87B30028D40C /* Builder.swift */,
-			);
-			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,15 +146,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AACD12427D9EE2F00D2B3D0 /* ReplacementViewForValidationViewController.swift in Sources */,
 				8A1BE70F27CEB1DD00F9F465 /* ValidationButton.swift in Sources */,
 				8A1BE6FF27CE83D600F9F465 /* ValidationButtonViewController.swift in Sources */,
-				8A1BE71127CF4FC700F9F465 /* Router.swift in Sources */,
 				8A1BE6FB27CE83D600F9F465 /* AppDelegate.swift in Sources */,
 				8A1BE71327CF50FF00F9F465 /* ValidationViewController.swift in Sources */,
 				8A424FE327CF86A30028D40C /* ValidationView.swift in Sources */,
 				8A1BE6FD27CE83D600F9F465 /* SceneDelegate.swift in Sources */,
-				8A424FE927D52B810028D40C /* Errors.swift in Sources */,
-				8A424FE627CF87B30028D40C /* Builder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

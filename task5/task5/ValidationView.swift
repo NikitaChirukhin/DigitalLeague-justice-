@@ -62,16 +62,16 @@ class ValidationView: UIView {
 //MARK: - ValidationView Private methods
 
 extension ValidationView {
+    
     @objc private func tapeOnButton() {
         let isValid = delegate?.didTapOnValidationButton(validationText: textField.text ?? "", validationTarget: textField.placeholder ?? "")
         if isValid != nil && isValid == true {
             validationResultLabel.text = "Success.."
             validationResultLabel.textColor = .systemGreen
         } else {
-            validationResultLabel.text = "Wrong name.."
+            validationResultLabel.text = "Wrong validation.."
             validationResultLabel.textColor = .systemRed
         }
-
     }
     
     private func setUpView() {
@@ -82,7 +82,7 @@ extension ValidationView {
     
     private func setUpConstraint() {
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            textField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             
