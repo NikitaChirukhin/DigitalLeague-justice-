@@ -13,6 +13,7 @@ final class ViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -32,9 +33,15 @@ extension ViewController {
     
     private func setup() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
         
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
@@ -43,7 +50,7 @@ extension ViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = HeaderView(index: section, buttonText: MyData.myData[section].headerName)
+        let headerView = HeaderView(index: section, headerText: MyData.myData[section].headerName)
         headerView.delegate = self
         return headerView
     }
@@ -77,5 +84,4 @@ extension ViewController: HeaderDelegate {
         MyData.myData[idx].isExpandable = !MyData.myData[idx].isExpandable
         tableView.reloadSections([idx], with: .automatic)
     }
-
 }

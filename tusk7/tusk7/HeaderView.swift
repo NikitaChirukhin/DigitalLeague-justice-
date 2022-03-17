@@ -15,19 +15,42 @@ final class HeaderView: UIView {
     
     weak var delegate: HeaderDelegate?
     private let index: Int
-    private let buttonText: String
+    private let headerText: String
+    private var transformButton = CGAffineTransform(rotationAngle: CGFloat.pi)
+    
+    var sectionIsExpanded: Bool = true {
+        didSet {
+            UIView.animate(withDuration: 0.25) {
+                if self.sectionIsExpanded {
+                    self.expendButton.transform = CGAffineTransform.identity
+                } else {
+                    self.expendButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2.0)
+                }
+            }
+        }
+    }
+    
+    private lazy var genreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IowanOldStyle-Roman", size: 25)
+        label.textColor = .black
+        return label
+    }()
     
     private lazy var expendButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemRed
         button.addTarget(self, action: #selector(expendButtonTap), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.tintColor = .black
+        button.transform = transformButton
         return button
     }()
     
-    init(index: Int, buttonText: String){
+    init(index: Int, headerText: String){
         self.index = index
-        self.buttonText = buttonText
+        self.headerText = headerText
         
         super.init(frame: .zero)
         
@@ -43,18 +66,26 @@ final class HeaderView: UIView {
 extension HeaderView {
     private func setup() {
         addSubview(expendButton)
+        addSubview(genreLabel)
         
-        expendButton.setTitle(buttonText, for: .normal)
+        genreLabel.text = headerText
         
         NSLayoutConstraint.activate([
             expendButton.topAnchor.constraint(equalTo: topAnchor),
-            expendButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            expendButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            expendButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+            expendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            expendButton.widthAnchor.constraint(equalToConstant: 50),
+            expendButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            genreLabel.topAnchor.constraint(equalTo: topAnchor),
+            genreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            genreLabel.trailingAnchor.constraint(equalTo: expendButton.leadingAnchor, constant: -10),
+            genreLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
     @objc private func expendButtonTap() {
+//        transformButton = CGAffineTransform(rotationAngle: CGFloat.pi*2)
+        sectionIsExpanded = !sectionIsExpanded
         delegate?.callHeader(idx: index)
     }
 }
