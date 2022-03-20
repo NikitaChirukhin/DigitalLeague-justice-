@@ -16,25 +16,12 @@ final class HeaderView: UIView {
     weak var delegate: HeaderDelegate?
     private let index: Int
     private let headerText: String
-    private var transformButton = CGAffineTransform(rotationAngle: CGFloat.pi)
-    
-    var sectionIsExpanded: Bool = true {
-        didSet {
-            UIView.animate(withDuration: 0.25) {
-                if self.sectionIsExpanded {
-                    self.expendButton.transform = CGAffineTransform.identity
-                } else {
-                    self.expendButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2.0)
-                }
-            }
-        }
-    }
     
     private lazy var genreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "IowanOldStyle-Roman", size: 25)
-        label.textColor = .black
+        label.font = UIFont(name: "HoeflerText-Black", size: 25)
+        label.textColor = .white
         return label
     }()
     
@@ -43,15 +30,14 @@ final class HeaderView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(expendButtonTap), for: .touchUpInside)
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.tintColor = .black
-        button.transform = transformButton
+        button.tintColor = .white
         return button
     }()
     
     init(index: Int, headerText: String){
         self.index = index
         self.headerText = headerText
-        
+
         super.init(frame: .zero)
         
         setup()
@@ -69,6 +55,10 @@ extension HeaderView {
         addSubview(genreLabel)
         
         genreLabel.text = headerText
+        backgroundColor = .tableViewBackGroundColor
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
             expendButton.topAnchor.constraint(equalTo: topAnchor),
@@ -84,8 +74,12 @@ extension HeaderView {
     }
     
     @objc private func expendButtonTap() {
-//        transformButton = CGAffineTransform(rotationAngle: CGFloat.pi*2)
-        sectionIsExpanded = !sectionIsExpanded
         delegate?.callHeader(idx: index)
+    }
+}
+
+extension HeaderView {
+    func changeChevronDirection() {
+        expendButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
     }
 }

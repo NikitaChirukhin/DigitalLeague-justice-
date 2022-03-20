@@ -10,6 +10,8 @@ import UIKit
 final class ViewController: UIViewController {
     
     private let reuseIdentifier = "TableViewCell"
+    
+    private let imageWidth = 90
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -17,6 +19,10 @@ final class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.backgroundColor = .tableViewBackGroundColor
+        tableView.layer.shadowColor = UIColor.lightGray.cgColor
+        tableView.layer.shadowOpacity = 0.6
+        tableView.layer.shadowRadius = 3
         return tableView
     }()
     
@@ -34,12 +40,12 @@ extension ViewController {
     private func setup() {
         view.addSubview(tableView)
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .tableViewBackGroundColor
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -52,12 +58,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView(index: section, headerText: MyData.myData[section].headerName)
         headerView.delegate = self
+        if MyData.myData[section].isExpandable {
+            headerView.changeChevronDirection()
+        }
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        40
-    }
     func numberOfSections(in tableView: UITableView) -> Int {
         MyData.myData.count
     }
@@ -70,12 +76,27 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! TableViewCell
-        cell.textLabel?.text = MyData.myData[indexPath.section].subType[indexPath.row]
-        return cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if MyData.myData[indexPath.section].isExpandable {
+            return 90
+        } else {
+            return 0
+        }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        50
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? TableViewCell {
+            cell.dataForCell(coverName: MyData.myData[indexPath.section].subType[indexPath.row],
+                             rating: "5",
+                             image: nil)
+            return cell
+        }
+        return UITableViewCell()
+    }
 }
 
 //MARK: - HeaderViewDelegate
