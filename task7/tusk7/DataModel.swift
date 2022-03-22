@@ -22,6 +22,6 @@ struct DataModel {
 
 final class MyData {
     static var myData: [DataModel] = [DataModel(headerName: "Rock", subType: ["AC/DC", "Metallica", "Slipknot"], isExpandable: false),
-                                    DataModel(headerName: "Pop", subType: ["Riana", "Pink", "Adele"], isExpandable: false),
+                                    DataModel(headerName: "Pop", subType: ["Rihanna", "Pink", "Adele"], isExpandable: false),
                                     DataModel(headerName: "Rap", subType: ["50Cent", "Eminem", "Drake"], isExpandable: false)]
 }
