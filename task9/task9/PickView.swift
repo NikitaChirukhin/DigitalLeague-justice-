@@ -28,7 +28,8 @@ final class PickView: UIView {
     
     private lazy var layerView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemPink
+        imageView.image = .checkmark
+        imageView.tintColor = .systemBlue
         return imageView
     }()
     
@@ -51,7 +52,7 @@ extension PickView {
     private func setupView() {
     
         layer.cornerRadius = 12
-        backgroundColor = .systemBlue
+        backgroundColor = .systemGray
         
         clickable()
         
@@ -82,12 +83,12 @@ extension PickView {
         tintColor = .green
         layer.borderWidth = 2
         layer.borderColor = .init(red: 0, green: 1, blue: 0, alpha: 1)
-        layerView.tintColor = .green
+        layerView.tintColor = .systemGreen
         layerView.image = .checkmark
     }
     
     private func viewUnSelected() {
         layer.borderWidth = 0
-        layerView.tintColor = .red
+        layerView.tintColor = .systemBlue
     }
 }
