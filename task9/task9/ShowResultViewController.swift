@@ -41,11 +41,10 @@ extension ShowResultViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(resultLabel)
-        
-        let resultLabelFrame = CGRect(x: UIScreen.main.bounds.width/2 - UIScreen.main.bounds.width/4,
-                                y: view.safeAreaInsets.top + 50,
-                                width: UIScreen.main.bounds.width/2,
-                                height: 60)
-        resultLabel.frame = resultLabelFrame
+
+        resultLabel.frame = CGRect(x: UIScreen.main.bounds.width/2 - UIScreen.main.bounds.width/4,
+                                   y: view.safeAreaInsets.top + 50,
+                                   width: UIScreen.main.bounds.width/2,
+                                   height: 60)
     }
 }

@@ -27,12 +27,6 @@ class SexViewController: UIViewController {
         
         setupView()
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        setupFrames()
-    }
 }
 
 //MARK: - Private methods
@@ -42,22 +36,16 @@ extension SexViewController {
         view.backgroundColor = .systemBackground
         
         for i in 0...dataModel.pickViewModel.count - 1 {
-            pickViews.append(makePickView(idx: i))
+            pickViews.append(setupPickView(idx: i))
         }
-        
+        pushResultViewControllerButton.frame = CGRect(x: 40,
+                                                      y: view.bounds.maxY - 60 - 10,
+                                                      width: UIScreen.main.bounds.width - 20 - 20 - 40,
+                                                      height: 30)
         view.addSubview(pushResultViewControllerButton)
     }
     
-    private func setupFrames() {
-    
-        let pushResultViewControllerButtonFrame = CGRect(x: 40,
-                                         y: view.bounds.maxY - 60 - 10,
-                                         width: UIScreen.main.bounds.width - 20 - 20 - 40,
-                                         height: 30)
-        pushResultViewControllerButton.frame = pushResultViewControllerButtonFrame
-    }
-    
-    private func makePickView(idx: Int) -> PickView {
+    private func setupPickView(idx: Int) -> PickView {
         let pickView = PickView(data: dataModel.pickViewModel[idx])
         pickView.frame = CGRect(x: 20,
                                 y: 60 + 20 * idx + 50 * idx,

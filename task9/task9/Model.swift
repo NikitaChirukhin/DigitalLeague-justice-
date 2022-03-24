@@ -11,8 +11,7 @@ struct DataModel {
     var pickViewModel = [PickViewModel(sex: "Man"),
                     PickViewModel(sex: "Woman"),
                     PickViewModel(sex: "Dog"),
-                    PickViewModel(sex: "Attack helicopter"),
-                    PickViewModel(sex: "Cow")]
+                    PickViewModel(sex: "Attack helicopter")]
 }
 
 struct PickViewModel {
