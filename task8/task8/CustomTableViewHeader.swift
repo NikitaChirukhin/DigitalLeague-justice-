@@ -39,7 +39,7 @@ final class CustomTableViewHeader: UIView {
         self.headerText = headerText
 
         super.init(frame: .zero)
-        
+
         setup()
     }
     
@@ -58,8 +58,7 @@ extension CustomTableViewHeader {
         
         playerLabel.text = headerText
         backgroundColor = .systemGray
-        layer.cornerRadius = 10
-        
+
         NSLayoutConstraint.activate([
             expendButton.topAnchor.constraint(equalTo: topAnchor),
             expendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
