@@ -1,3 +1,3 @@
 ## DigitalLeague
 
-simple tusk for digitalleague
+simple task for digitalleague
